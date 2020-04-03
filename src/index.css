@@ -34,5 +34,7 @@ code {
   display: flex;
   flex-direction: row;
 }
-
+.game-info {
+  margin-left: 1em;
+}
 button:focus {outline:0;}

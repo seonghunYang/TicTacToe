@@ -2,26 +2,36 @@ import React, { Component } from 'react';
 import Square from './Square';
 
 class Board extends Component {
+
+  renderSquare(num) {
+    return (
+      <Square value={this.props.squares[num]} 
+      onClick={() => {
+        this.props.onClick(num);
+      }}
+      />
+    );
+  }
+
   renderRow(rowNum) {
     return (
       <div className="row">
-        <Square value={rowNum }/>
-        <Square value={rowNum + 1}/>
-        <Square value={rowNum + 2}/>
+        {this.renderSquare(rowNum * 3 + 0)}
+        {this.renderSquare(rowNum * 3 + 1)}
+        {this.renderSquare(rowNum * 3 + 2)}
       </div>
     );
   }
+
   render() {
-    const status = "Next player: X"
+
     return (
       //square도 이제 component가 된거!
       <div>
-        <div className="status">{status}</div>
         {this.renderRow(0)}
-        {this.renderRow(3)}
-        {this.renderRow(6)}
+        {this.renderRow(1)}
+        {this.renderRow(2)}
       </div>      
-
     );
   }
 }
