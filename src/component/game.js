@@ -66,7 +66,7 @@ class Game extends React.Component {
     this.setState({
       history: this.state.history,
       step: idx
-    })
+    });
   }
 
   render() {
@@ -76,7 +76,10 @@ class Game extends React.Component {
     let status;
     if (winner) {
       status = `winner: ${winner}`
-    }else {
+    } else if (this.state.step === 9) {
+      status = 'draw';
+    }
+    else {
       status = `Next player: ${this.nextPlayer(this.state.step)}`
     }
     return (
@@ -99,7 +102,18 @@ class Game extends React.Component {
                 });
               }}>undo</button>)
           }
-          
+          {
+            ((winner) || (status === "draw")) && (<button
+              onClick={() => {
+                this.setState({
+                  history: [
+                    {squares: Array(9).fill(null)}
+                  ],
+                  step: 0
+                });
+              }}
+            >restart</button>)
+          }
         </div>
       </div>
     )
